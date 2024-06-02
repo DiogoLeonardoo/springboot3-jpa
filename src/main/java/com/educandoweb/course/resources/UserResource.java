@@ -43,9 +43,19 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
         return ResponseEntity.created(uri).body(obj);
         }
 
+    // O método delete é um endpoint para deletar os usuários
+
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         service.delete(id);
         return ResponseEntity.noContent().build();
+        }
+
+        // O método update é um endpoint para atualizar os usuários
+
+    @PutMapping(value = "/{id}")
+        public ResponseEntity<User> update(@PathVariable Long id, @RequestBody User obj) {
+            obj = service.update(id, obj);
+            return ResponseEntity.ok().body(obj);
         }
     }
