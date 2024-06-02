@@ -20,7 +20,13 @@ public class Category implements Serializable {
     private Long id;
     private String name;
 
+    //A anotacao @JsonIgnore é usada para evitar o loop infinito
+
     @JsonIgnore
+
+    //Associacao muitos para muitos com a tabela tb_product e a tabela tb_product_category
+    //A tabela tb_product_category é a tabela intermediaria entre as tabelas tb_product e tb_category
+
     @ManyToMany(mappedBy = "categories")
     private Set<Product> products = new HashSet<>();
 

@@ -20,6 +20,19 @@ public class Product implements Serializable {
     private String imgUrl;
 
     @ManyToMany
+
+    //Associacao muitos para muitos com a tabela tb_category e a tabela tb_product_category
+    //A tabela tb_product_category é a tabela intermediaria entre as tabelas tb_product e tb_category
+    //A tabela tb_product_category é criada automaticamente pelo JPA
+    //A tabela tb_product_category é criada com as chaves estrangeiras product_id e category_id
+    //A anotacao @JoinTable é usada para definir o nome da tabela intermediaria e as chaves estrangeiras
+    //A anotacao @JoinColumn é usada para definir o nome da chave estrangeira
+    //A anotacao @InverseJoinColumn é usada para definir o nome da outra chave estrangeira
+    //A anotacao @JoinTable é usada para definir o nome da tabela intermediaria e as chaves estrangeiras
+    //A anotacao @JoinColumn é usada para definir o nome da chave estrangeira
+    //A anotacao @InverseJoinColumn é usada para definir o nome da outra chave estrangeira
+
+
     @JoinTable(name = "tb_product_category", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<Category> categories = new HashSet<>();
 
@@ -78,6 +91,8 @@ public class Product implements Serializable {
         return categories;
     }
 
+
+    //Equals e HashCode para comparar os objetos pelo id
 
     @Override
     public boolean equals(Object o) {
