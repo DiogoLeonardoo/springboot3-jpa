@@ -9,14 +9,14 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-@RestController
+    @RestController
 
-// O @RequestMapping é uma anotação que mapeia solicitações da web
-// para classes manipuladoras específicas, nesse caso, UserResource
-// manipula solicitações da web para /users que realiza operações CRUD
+    // O @RequestMapping é uma anotação que mapeia solicitações da web
+    // para classes manipuladoras específicas, nesse caso, UserResource
+    // manipula solicitações da web para /users que realiza operações CRUD
 
-@RequestMapping(value = "/users")
-public class UserResource {
+    @RequestMapping(value = "/users")
+    public class UserResource {
 
     @Autowired
     private UserService service;
@@ -41,5 +41,11 @@ public class UserResource {
         obj = service.insert(obj);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
         return ResponseEntity.created(uri).body(obj);
+        }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        service.delete(id);
+        return ResponseEntity.noContent().build();
         }
     }
