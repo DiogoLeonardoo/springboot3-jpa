@@ -35,6 +35,15 @@ public class Order implements Serializable {
     @OneToMany(mappedBy = "id.order")
     private Set<OrderItem> items = new HashSet<>();
 
+    // OneToOne é uma associação de um para um (um pedido para um pagamento)
+    // mappedBy é o nome do atributo que mapeia a associação na outra entidade
+    // cascade é usado para especificar operações em cascata
+    // CascadeType.ALL é usado para especificar que todas as operações devem ser propagadas para a entidade associada
+    // Ou seja se eu salvar um pedido, o pagamento também será salvo
+
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
+    private Payment payment;
+
     public Order() {
     }
 
@@ -75,6 +84,14 @@ public class Order implements Serializable {
 
     public void setClient(User client) {
         this.client = client;
+    }
+
+    public Payment getPayment() {
+        return payment;
+    }
+
+    public void setPayment(Payment payment) {
+        this.payment = payment;
     }
 
     public Set<OrderItem> getItems() {
